@@ -1,0 +1,68 @@
+name: Demo Workflow
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  handle-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Get Issue Creator
+        id: get_creator
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue_creator = context.payload.issue.user.login;
+            core.setOutput('creator', issue_creator);
+
+      - name: Call Demo Contract
+        id: approve
+        uses: kudos-ink/approve@392c8b5c1fb19fae92163827c964cef06155e377
+        with:
+          ws-provider-url: ${{ vars.WS_PROVIDER_URL }}
+          mnemonic-phrase: ${{ secrets.MNEMONIC_PHRASE }}
+          contract-address: ${{ vars.CONTRACT_ADDRESS }}
+          contract-abi: ${{ vars.ABI }}
+          contribution-id: ${{ github.event.issue.id }}
+          contributor-identity: ${{ steps.get_creator.outputs.creator }}
+
+      - name: Comment on the Issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue_number = context.issue.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // Post a comment mentioning the issue creator & tx hash
+            const commentBody = `@${{steps.get_creator.outputs.creator}} - Your contribution has been successfully approved.\nA proof has been registered here: https://alephzero.subscan.io/extrinsic/${{steps.approve.outputs.hash}}`;
+            await github.rest.issues.createComment({
+              owner: owner,
+              repo: repo,
+              issue_number: issue_number,
+              body: commentBody
+            });
+
+      - name: Close the Issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue_number = context.issue.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // Close the issue
+            await github.rest.issues.update({
+              owner: owner,
+              repo: repo,
+              issue_number: issue_number,
+              state: 'closed'
+            });
