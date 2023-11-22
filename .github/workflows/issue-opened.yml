@@ -9,8 +9,9 @@ permissions:
   contents: read
 
 jobs:
-  handle-issue:
+  trigger-demo:
     runs-on: ubuntu-latest
+    if: ${{ join(github.event.issue.labels) == '' }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
