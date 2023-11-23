@@ -1,8 +1,7 @@
 {
-  "name": "@inkathon/monorepo",
-  "description": "Full-Stack DApp Boilerplate for ink! Smart Contracts",
-  "homepage": "https://inkathon.xyz",
-  "author": "Scio Labs <hello@scio.xyz> (https://scio.xyz)",
+  "name": "@kudos-ink/demo",
+  "description": "Demo of Kudos Ink! automated contribution reward services.",
+  "homepage": "https://github.com/kudos-ink",
   "private": true,
   "workspaces": [
     "frontend",
@@ -25,8 +24,6 @@
     "changeset:publish": "changeset publish"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.8",
-    "@changesets/cli": "^2.26.2",
     "lint-staged": "^15.1.0",
     "next": "^13.5.6",
     "simple-git-hooks": "^2.9.0",
