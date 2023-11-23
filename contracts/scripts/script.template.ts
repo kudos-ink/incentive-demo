@@ -4,7 +4,7 @@ import { getDeploymentData } from './utils/getDeploymentData'
 import { initPolkadotJs } from './utils/initPolkadotJs'
 
 /**
- * Example script that updates & reads a message from a greeter contract.
+ * Example script that updates & reads a message from a demo contract.
  * Can be used as a template for other scripts.
  *
  * Parameters:
@@ -18,8 +18,8 @@ import { initPolkadotJs } from './utils/initPolkadotJs'
 const main = async () => {
   const { api, account } = await initPolkadotJs()
 
-  // Deploy greeter contract
-  const { abi, wasm } = await getDeploymentData('greeter')
+  // Deploy demo contract
+  const { abi, wasm } = await getDeploymentData('demo')
   const { address } = await deployContract(api, account, abi, wasm, 'default', [])
   const contract = new ContractPromise(api, abi, address)
 
