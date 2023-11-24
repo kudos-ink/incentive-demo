@@ -1,5 +1,6 @@
 pub use ink::prelude::string::String;
 use ink::primitives::AccountId;
+
 pub type ContributionId = u64;
 pub type ContributorId = u64;
 
