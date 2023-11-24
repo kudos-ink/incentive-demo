@@ -17,6 +17,5 @@ pub struct Contribution {
     // The unique contribution ID (e.g. the Github issue #id).
     pub id: ContributionId,
     // The contributor public key (e.g. extract from the `identities` mapping).
-    pub contributor: AccountId,
-    pub claimed: bool,
+    pub contributor: AccountId
 }

@@ -13,8 +13,6 @@ pub enum DemoError {
     NoContributionApprovedYet,
     /// Contributor identity is not registered in the DB.
     UnknownContributor,
-    /// Returned when attempting to claim an already claimed reward.
-    ContributionAlreadyClaimed,
 }
 
 impl From<OwnableError> for DemoError {
