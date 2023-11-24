@@ -412,6 +412,36 @@ pub mod demo {
         }
 
         #[ink::test]
+        fn check_works() {
+            let accounts = default_accounts();
+            let mut contract = create_contract(1u128);
+            let identity = "bobby";
+            let identity2 = "charlie";
+
+            set_next_caller(accounts.bob);
+            let _ = contract.register_identity(identity.to_string());
+
+            set_next_caller(accounts.charlie);
+            let _ = contract.register_identity(identity2.to_string());
+
+            let contribution_id = 1u64;
+            set_next_caller(accounts.alice);
+            let _ = contract.approve(contribution_id, identity.to_string());
+            
+            set_next_caller(accounts.bob);
+            assert_eq!(
+                contract.check(contribution_id),
+                Ok(true)
+            );
+
+            set_next_caller(accounts.charlie);
+            assert_eq!(
+                contract.check(contribution_id),
+                Ok(false)
+            );
+        }
+
+        #[ink::test]
         fn claim_works() {
             let accounts = default_accounts();
             let single_reward = 1u128;
