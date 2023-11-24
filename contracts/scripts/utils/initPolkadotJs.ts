@@ -26,7 +26,7 @@ export type InitParams = {
   toBNWithDecimals: (_: number | string) => BN
 }
 export const initPolkadotJs = async (): Promise<InitParams> => {
-  const accountUti = process.env.ACCOUNT_URI || '//Alice'
+  const accountUti = process.env.ACCOUNT_URI 
   const chain = getSubstrateChain(chainId)
   if (!chain) throw new Error(`Chain '${chainId}' not found`)
 
