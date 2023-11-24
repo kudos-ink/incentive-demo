@@ -16,17 +16,11 @@ import { writeContractAddresses } from './utils/writeContractAddresses'
  */
 const main = async () => {
   const initParams = await initPolkadotJs()
-  const reward = process.env.REWARD;
-  if (reward === undefined) {
-    console.error("Set up the variable REWARD")
-    process.exit(1)
-  }
 
-  const { api, chain, account, toBNWithDecimals } = initParams
-  const convertedReward = toBNWithDecimals(reward);
+  const { api, chain, account } = initParams
   // Deploy demo contract
   const { abi, wasm } = await getDeploymentData('demo')
-  const demo = await deployContract(api, account, abi, wasm, 'new', [convertedReward])
+  const demo = await deployContract(api, account, abi, wasm, 'new', [])
 
   // Write contract addresses to `{contract}/{network}.ts` file(s)
   await writeContractAddresses(chain.network, {
