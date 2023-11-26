@@ -11,8 +11,6 @@ pub enum DemoError {
     ContributionAlreadyApproved,
     /// No `contribution` is approved yet in the DB.
     NoContributionApprovedYet,
-    /// Contributor identity is not registered in the DB.
-    UnknownContributor,
 }
 
 impl From<OwnableError> for DemoError {
