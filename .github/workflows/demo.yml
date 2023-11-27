@@ -15,6 +15,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      
+      - name: Extract Crypto Address
+        id: extract
+        run: |
+          python .github/scripts/extract_address.py "${{ github.event.issue.body }}"
 
       - name: Get Issue Creator
         id: get_creator
@@ -26,14 +31,14 @@ jobs:
 
       - name: Call Demo Contract
         id: approve
-        uses: kudos-ink/approve@392c8b5c1fb19fae92163827c964cef06155e377
+        uses: kudos-ink/approve@v0.0.2
         with:
           ws-provider-url: ${{ vars.WS_PROVIDER_URL }}
           mnemonic-phrase: ${{ secrets.MNEMONIC_PHRASE }}
           contract-address: ${{ vars.CONTRACT_ADDRESS }}
           contract-abi: ${{ vars.ABI }}
-          contribution-id: ${{ github.event.issue.id }}
-          contributor-identity: ${{ steps.get_creator.outputs.creator }}
+          contribution-id: ${{ github.event.issue.number }}
+          contributor: ${{ steps.extract.outputs.address}}
 
       - name: Comment on the Issue
         uses: actions/github-script@v6
@@ -42,9 +47,10 @@ jobs:
             const issue_number = context.issue.number;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
+            const blockHash = ${{ steps.approve.outputs.block }};
 
             // Post a comment mentioning the issue creator & tx hash
-            const commentBody = `@${{steps.get_creator.outputs.creator}} - Your contribution has been successfully approved.\nA proof has been registered here: https://alephzero.subscan.io/extrinsic/${{steps.approve.outputs.hash}}`;
+            const commentBody = `@${{steps.get_creator.outputs.creator}} - Your contribution has been successfully approved.\nA proof has been registered here: https://test.azero.dev/?rpc=wss%3A%2F%2Fws.test.azero.dev#/explorer/query/${blockHash}`;
             await github.rest.issues.createComment({
               owner: owner,
               repo: repo,

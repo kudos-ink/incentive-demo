@@ -1,0 +1,19 @@
+name: Trigger demo
+description: Use this form to trigger the demo and provide your substrate public address for contribution proof registration.
+title: "Trigger demo"
+labels: ['demo']
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: "Thank you for your testing the demo! Please fill out your substrate public address below."
+
+  - type: input
+    id: address
+    attributes:
+      label: Public Address
+      description: "To register a proof of contribution, please provide your substrate public address below."
+      placeholder: "Address: [Paste your cryptocurrency public address here]"
+    validations:
+      required: true
