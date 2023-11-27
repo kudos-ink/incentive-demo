@@ -1,12 +1,12 @@
 {
   "source": {
-    "hash": "0x238ea607eda59a34621a48769b36f3eb52fe108f2991247b890b280185156f0b",
+    "hash": "0xac8d87d0bcbbdc753e99a4b03114d77aacade51448213460e27f777cf35d9dcb",
     "language": "ink! 4.3.0",
-    "compiler": "rustc 1.73.0",
+    "compiler": "rustc 1.69.0",
     "build_info": {
       "build_mode": "Release",
       "cargo_contract_version": "3.2.0",
-      "rust_toolchain": "stable-x86_64-unknown-linux-gnu",
+      "rust_toolchain": "stable-aarch64-apple-darwin",
       "wasm_opt_settings": {
         "keep_debug_symbols": false,
         "optimization_passes": "Z"
@@ -35,7 +35,7 @@
             "ink_primitives",
             "ConstructorResult"
           ],
-          "type": 4
+          "type": 3
         },
         "selector": "0x9bae9d5e"
       }
@@ -52,32 +52,32 @@
         "displayName": [
           "Balance"
         ],
-        "type": 19
+        "type": 15
       },
       "blockNumber": {
         "displayName": [
           "BlockNumber"
         ],
-        "type": 21
+        "type": 17
       },
       "chainExtension": {
         "displayName": [
           "ChainExtension"
         ],
-        "type": 22
+        "type": 18
       },
       "hash": {
         "displayName": [
           "Hash"
         ],
-        "type": 20
+        "type": 16
       },
       "maxEventTopics": 4,
       "timestamp": {
         "displayName": [
           "Timestamp"
         ],
-        "type": 3
+        "type": 6
       }
     },
     "events": [
@@ -89,39 +89,9 @@
             "label": "id",
             "type": {
               "displayName": [
-                "String"
+                "ContributionId"
               ],
-              "type": 7
-            }
-          },
-          {
-            "docs": [],
-            "indexed": false,
-            "label": "caller",
-            "type": {
-              "displayName": [
-                "AccountId"
-              ],
-              "type": 0
-            }
-          }
-        ],
-        "docs": [
-          "Emitted when an `id` is registered by an aspiring contributor."
-        ],
-        "label": "IdentityRegistered"
-      },
-      {
-        "args": [
-          {
-            "docs": [],
-            "indexed": false,
-            "label": "id",
-            "type": {
-              "displayName": [
-                "ContributorId"
-              ],
-              "type": 3
+              "type": 6
             }
           },
           {
@@ -147,55 +117,27 @@
         "ink",
         "LangError"
       ],
-      "type": 6
+      "type": 5
     },
     "messages": [
-      {
-        "args": [
-          {
-            "label": "id",
-            "type": {
-              "displayName": [
-                "String"
-              ],
-              "type": 7
-            }
-          }
-        ],
-        "default": false,
-        "docs": [
-          " Register the caller as an aspiring contributor."
-        ],
-        "label": "register_identity",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 8
-        },
-        "selector": "0x87ebe7fb"
-      },
       {
         "args": [
           {
             "label": "contribution_id",
             "type": {
               "displayName": [
-                "ContributorId"
+                "ContributionId"
               ],
-              "type": 3
+              "type": 6
             }
           },
           {
-            "label": "contributor_id",
+            "label": "contributor",
             "type": {
               "displayName": [
-                "String"
+                "AccountId"
               ],
-              "type": 7
+              "type": 0
             }
           }
         ],
@@ -211,7 +153,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 8
+          "type": 7
         },
         "selector": "0x681266a0"
       },
@@ -221,17 +163,17 @@
             "label": "contribution_id",
             "type": {
               "displayName": [
-                "ContributorId"
+                "ContributionId"
               ],
-              "type": 3
+              "type": 6
             }
           }
         ],
         "default": false,
         "docs": [
-          " Check if the caller is the contributor of a given `contribution_id`."
+          " Simply returns the `AccountId` of a given contribution."
         ],
-        "label": "check",
+        "label": "get_contributor",
         "mutates": false,
         "payable": false,
         "returnType": {
@@ -239,25 +181,9 @@
             "ink",
             "MessageResult"
           ],
-          "type": 12
+          "type": 11
         },
-        "selector": "0xaf0a4058"
-      },
-      {
-        "args": [],
-        "default": false,
-        "docs": [],
-        "label": "Ownable::owner",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 15
-        },
-        "selector": "0x4fa43c8c"
+        "selector": "0x1958a288"
       },
       {
         "args": [
@@ -268,7 +194,7 @@
                 "ownable_external",
                 "TransferOwnershipInput1"
               ],
-              "type": 16
+              "type": 12
             }
           }
         ],
@@ -282,9 +208,25 @@
             "ink",
             "MessageResult"
           ],
-          "type": 17
+          "type": 13
         },
         "selector": "0x11f43efd"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "Ownable::owner",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 11
+        },
+        "selector": "0x4fa43c8c"
       },
       {
         "args": [],
@@ -298,7 +240,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 17
+          "type": 13
         },
         "selector": "0x5e228753"
       }
@@ -357,48 +299,15 @@
               "layout": {
                 "root": {
                   "layout": {
-                    "struct": {
-                      "fields": [
-                        {
-                          "layout": {
-                            "leaf": {
-                              "key": "0x3fa51969",
-                              "ty": 3
-                            }
-                          },
-                          "name": "id"
-                        },
-                        {
-                          "layout": {
-                            "leaf": {
-                              "key": "0x3fa51969",
-                              "ty": 0
-                            }
-                          },
-                          "name": "contributor"
-                        }
-                      ],
-                      "name": "Contribution"
+                    "leaf": {
+                      "key": "0x3fa51969",
+                      "ty": 0
                     }
                   },
                   "root_key": "0x3fa51969"
                 }
               },
               "name": "contributions"
-            },
-            {
-              "layout": {
-                "root": {
-                  "layout": {
-                    "leaf": {
-                      "key": "0x1358a074",
-                      "ty": 0
-                    }
-                  },
-                  "root_key": "0x1358a074"
-                }
-              },
-              "name": "identities"
             }
           ],
           "name": "Demo"
@@ -451,20 +360,12 @@
       "id": 3,
       "type": {
         "def": {
-          "primitive": "u64"
-        }
-      }
-    },
-    {
-      "id": 4,
-      "type": {
-        "def": {
           "variant": {
             "variants": [
               {
                 "fields": [
                   {
-                    "type": 5
+                    "type": 4
                   }
                 ],
                 "index": 0,
@@ -473,7 +374,7 @@
               {
                 "fields": [
                   {
-                    "type": 6
+                    "type": 5
                   }
                 ],
                 "index": 1,
@@ -485,11 +386,11 @@
         "params": [
           {
             "name": "T",
-            "type": 5
+            "type": 4
           },
           {
             "name": "E",
-            "type": 6
+            "type": 5
           }
         ],
         "path": [
@@ -498,7 +399,7 @@
       }
     },
     {
-      "id": 5,
+      "id": 4,
       "type": {
         "def": {
           "tuple": []
@@ -506,7 +407,7 @@
       }
     },
     {
-      "id": 6,
+      "id": 5,
       "type": {
         "def": {
           "variant": {
@@ -525,15 +426,15 @@
       }
     },
     {
-      "id": 7,
+      "id": 6,
       "type": {
         "def": {
-          "primitive": "str"
+          "primitive": "u64"
         }
       }
     },
     {
-      "id": 8,
+      "id": 7,
       "type": {
         "def": {
           "variant": {
@@ -541,7 +442,7 @@
               {
                 "fields": [
                   {
-                    "type": 9
+                    "type": 8
                   }
                 ],
                 "index": 0,
@@ -550,7 +451,7 @@
               {
                 "fields": [
                   {
-                    "type": 6
+                    "type": 5
                   }
                 ],
                 "index": 1,
@@ -562,11 +463,53 @@
         "params": [
           {
             "name": "T",
-            "type": 9
+            "type": 8
           },
           {
             "name": "E",
-            "type": 6
+            "type": 5
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 4
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 9
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 4
+          },
+          {
+            "name": "E",
+            "type": 9
           }
         ],
         "path": [
@@ -583,49 +526,7 @@
               {
                 "fields": [
                   {
-                    "type": 5
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 10
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 5
-          },
-          {
-            "name": "E",
-            "type": 10
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 10,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 11,
+                    "type": 10,
                     "typeName": "OwnableError"
                   }
                 ],
@@ -634,19 +535,7 @@
               },
               {
                 "index": 1,
-                "name": "IdentityAlreadyRegistered"
-              },
-              {
-                "index": 2,
                 "name": "ContributionAlreadyApproved"
-              },
-              {
-                "index": 3,
-                "name": "NoContributionApprovedYet"
-              },
-              {
-                "index": 4,
-                "name": "UnknownContributor"
               }
             ]
           }
@@ -659,7 +548,7 @@
       }
     },
     {
-      "id": 11,
+      "id": 10,
       "type": {
         "def": {
           "variant": {
@@ -685,141 +574,49 @@
       }
     },
     {
+      "id": 11,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 12
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 5
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 12
+          },
+          {
+            "name": "E",
+            "type": 5
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
       "id": 12,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 13
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 6
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 13
-          },
-          {
-            "name": "E",
-            "type": 6
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 13,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 14
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 10
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 14
-          },
-          {
-            "name": "E",
-            "type": 10
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 14,
-      "type": {
-        "def": {
-          "primitive": "bool"
-        }
-      }
-    },
-    {
-      "id": 15,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 16
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 6
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 16
-          },
-          {
-            "name": "E",
-            "type": 6
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 16,
       "type": {
         "def": {
           "variant": {
@@ -852,7 +649,7 @@
       }
     },
     {
-      "id": 17,
+      "id": 13,
       "type": {
         "def": {
           "variant": {
@@ -860,58 +657,58 @@
               {
                 "fields": [
                   {
-                    "type": 18
+                    "type": 14
                   }
                 ],
                 "index": 0,
                 "name": "Ok"
               },
-              {
-                "fields": [
-                  {
-                    "type": 6
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 18
-          },
-          {
-            "name": "E",
-            "type": 6
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 18,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
               {
                 "fields": [
                   {
                     "type": 5
                   }
                 ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 14
+          },
+          {
+            "name": "E",
+            "type": 5
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 4
+                  }
+                ],
                 "index": 0,
                 "name": "Ok"
               },
               {
                 "fields": [
                   {
-                    "type": 11
+                    "type": 10
                   }
                 ],
                 "index": 1,
@@ -923,11 +720,11 @@
         "params": [
           {
             "name": "T",
-            "type": 5
+            "type": 4
           },
           {
             "name": "E",
-            "type": 11
+            "type": 10
           }
         ],
         "path": [
@@ -936,7 +733,7 @@
       }
     },
     {
-      "id": 19,
+      "id": 15,
       "type": {
         "def": {
           "primitive": "u128"
@@ -944,7 +741,7 @@
       }
     },
     {
-      "id": 20,
+      "id": 16,
       "type": {
         "def": {
           "composite": {
@@ -964,7 +761,7 @@
       }
     },
     {
-      "id": 21,
+      "id": 17,
       "type": {
         "def": {
           "primitive": "u32"
@@ -972,7 +769,7 @@
       }
     },
     {
-      "id": 22,
+      "id": 18,
       "type": {
         "def": {
           "variant": {}
