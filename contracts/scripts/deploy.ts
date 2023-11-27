@@ -4,7 +4,7 @@ import { initPolkadotJs } from './utils/initPolkadotJs'
 import { writeContractAddresses } from './utils/writeContractAddresses'
 
 /**
- * Script that deploys the greeter contract and writes its address to a file.
+ * Script that deploys the demo contract and writes its address to a file.
  *
  * Parameters:
  *  - `DIR`: Directory to read contract build artifacts & write addresses to (optional, defaults to `./deployments`)
@@ -16,15 +16,15 @@ import { writeContractAddresses } from './utils/writeContractAddresses'
  */
 const main = async () => {
   const initParams = await initPolkadotJs()
-  const { api, chain, account } = initParams
 
-  // Deploy greeter contract
-  const { abi, wasm } = await getDeploymentData('greeter')
-  const greeter = await deployContract(api, account, abi, wasm, 'default', [])
+  const { api, chain, account } = initParams
+  // Deploy demo contract
+  const { abi, wasm } = await getDeploymentData('demo')
+  const demo = await deployContract(api, account, abi, wasm, 'new', [])
 
   // Write contract addresses to `{contract}/{network}.ts` file(s)
   await writeContractAddresses(chain.network, {
-    greeter,
+    demo,
   })
 }
 
