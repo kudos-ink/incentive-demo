@@ -7,9 +7,7 @@ pub mod types;
 #[openbrush::contract]
 pub mod demo {
     use super::errors::DemoError;
-    use super::types::Contribution;
-    use super::types::{ContributionId, ContributorId};
-    use ink::prelude::string::String;
+    use super::types::ContributionId;
     use ink::storage::Mapping;
     use openbrush::{modifiers, traits::Storage};
 
@@ -21,20 +19,13 @@ pub mod demo {
         ownable: ownable::Data,
 
         // The approved `Contribution`.
-        contributions: Mapping<ContributionId, Contribution>,
-    }
-
-    /// Emitted when an `id` is registered by an aspiring contributor.
-    #[ink(event)]
-    pub struct IdentityRegistered {
-        id: String,
-        caller: AccountId,
+        contributions: Mapping<ContributionId, AccountId>,
     }
 
     /// Emitted when a `contribution` is approved.
     #[ink(event)]
     pub struct ContributionApproval {
-        id: ContributorId,
+        id: ContributionId,
         contributor: AccountId,
     }
 
@@ -52,36 +43,26 @@ pub mod demo {
         #[modifiers(only_owner)]
         pub fn approve(
             &mut self,
-            contribution_id: ContributorId,
+            contribution_id: ContributionId,
             contributor: AccountId,
         ) -> Result<(), DemoError> {
             match self.contributions.get(contribution_id) {
                 Some(_) => Err(DemoError::ContributionAlreadyApproved),
                 None => {
-                    let contribution = Contribution {
-                        id: contribution_id,
-                        contributor,
-                    };
-                    self.contributions.insert(contribution_id, &contribution);
-
+                    self.contributions.insert(contribution_id, &contributor);
                     self.env().emit_event(ContributionApproval {
                         id: contribution_id,
                         contributor,
                     });
-
                     Ok(())
                 }
             }
         }
 
-        /// Check if the caller is the contributor of a given `contribution_id`.
+        /// Simply returns the `AccountId` of a given contribution.
         #[ink(message)]
-        pub fn check(&self, contribution_id: ContributorId) -> Result<bool, DemoError> {
-            let contribution = self
-                .contributions
-                .get(contribution_id)
-                .ok_or(DemoError::NoContributionApprovedYet)?;
-            Ok(contribution.contributor == Self::env().caller())
+        pub fn get_contributor(&self, contribution_id: ContributionId) -> Option<AccountId> {
+            self.contributions.get(contribution_id)
         }
     }
 
@@ -116,23 +97,13 @@ pub mod demo {
             let emitted_events = ink::env::test::recorded_events().collect::<Vec<_>>();
             assert_eq!(1, emitted_events.len());
             let decoded_events = decode_events(emitted_events);
-            if let Event::ContributionApproval(ContributionApproval { id, contributor }) =
-                decoded_events[0]
-            {
-                assert_eq!(id, contribution_id);
-                assert_eq!(contributor, accounts.bob);
-            } else {
-                panic!("encountered unexpected event kind: expected a ContributionApproval event")
-            }
+            let Event::ContributionApproval(ContributionApproval { id, contributor }) =
+                decoded_events[0];
+            assert_eq!(id, contribution_id);
+            assert_eq!(contributor, accounts.bob);
 
-            let maybe_contribution = contract.contributions.get(contribution_id);
-            assert_eq!(
-                maybe_contribution,
-                Some(Contribution {
-                    id: contribution_id,
-                    contributor: accounts.bob
-                })
-            );
+            let maybe_contributor = contract.contributions.get(contribution_id);
+            assert_eq!(maybe_contributor, Some(accounts.bob));
 
             // Approve it again returns an error
             assert_eq!(
@@ -170,7 +141,7 @@ pub mod demo {
         }
 
         #[ink::test]
-        fn check_works() {
+        fn contributor_getter_works() {
             let accounts = default_accounts();
             let mut contract = create_contract();
             let contribution_id = 1u64;
@@ -178,11 +149,11 @@ pub mod demo {
             set_next_caller(accounts.alice);
             let _ = contract.approve(contribution_id, accounts.bob);
 
-            set_next_caller(accounts.bob);
-            assert_eq!(contract.check(contribution_id), Ok(true));
-
-            set_next_caller(accounts.charlie);
-            assert_eq!(contract.check(contribution_id), Ok(false));
+            assert_eq!(
+                contract.get_contributor(contribution_id),
+                Some(accounts.bob)
+            );
+            assert_eq!(contract.get_contributor(2u64), None);
         }
 
         fn default_accounts() -> ink::env::test::DefaultAccounts<ink::env::DefaultEnvironment> {

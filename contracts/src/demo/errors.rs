@@ -5,12 +5,8 @@ use openbrush::contracts::traits::ownable::OwnableError;
 #[cfg_attr(feature = "std", derive(::scale_info::TypeInfo))]
 pub enum DemoError {
     OwnableError(OwnableError),
-    /// An aspiring contributor identity is already registered in the DB.
-    IdentityAlreadyRegistered,
     /// A `contribution` is already approved in the DB.
     ContributionAlreadyApproved,
-    /// No `contribution` is approved yet in the DB.
-    NoContributionApprovedYet,
 }
 
 impl From<OwnableError> for DemoError {
