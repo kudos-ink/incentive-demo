@@ -22,14 +22,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       <DefaultSeo
         dangerouslySetAllPagesToNoFollow={!env.isProduction}
         dangerouslySetAllPagesToNoIndex={!env.isProduction}
-        defaultTitle="ink!athon" // TODO
-        titleTemplate="%s | ink!athon" // TODO
-        description="Substrate-based Smart Contract & DApp Development Boilerplate" // TODO
+        defaultTitle="kudos ink!" // TODO
+        titleTemplate="%s | kudos ink!" // TODO
+        description="A minimalist kudos collector service for rewarded open source contributions." // TODO
         openGraph={{
           type: 'website',
           locale: 'en',
           url: env.url,
-          site_name: 'ink!athon', // TODO
+          site_name: 'kudos ink!', // TODO
           images: [
             {
               url: `${env.url}/images/cover.jpg`, // TODO
@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           ],
         }}
         twitter={{
-          handle: '@scio_xyz', // TODO
+          handle: '', // DO
         }}
       />
 
@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <UseInkathonProvider
-        appName="ink!athon" // TODO
+        appName="kudos" // TODO
         connectOnInit={true}
         defaultChain={env.defaultChain}
         deployments={getDeployments()}
