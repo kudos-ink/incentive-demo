@@ -1,4 +1,5 @@
 import { BaseLayout } from '@/components/layout/BaseLayout'
+import { Header } from '@/components/layout/Header'
 import { HotToastConfig } from '@/components/layout/HotToastConfig'
 import { env } from '@/config/environment'
 import { getDeployments } from '@/deployments/deployments'
@@ -18,21 +19,20 @@ const inconsolata = Inconsolata({ subsets: ['latin'] })
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      {/* TODO SEO */}
       <DefaultSeo
         dangerouslySetAllPagesToNoFollow={!env.isProduction}
         dangerouslySetAllPagesToNoIndex={!env.isProduction}
-        defaultTitle="kudos ink!" // TODO
-        titleTemplate="%s | kudos ink!" // TODO
-        description="A minimalist kudos collector service for rewarded open source contributions." // TODO
+        defaultTitle="kudos ink!"
+        titleTemplate="%s | kudos ink!"
+        description="A minimalist kudos collector service for rewarded open source contributions."
         openGraph={{
           type: 'website',
           locale: 'en',
           url: env.url,
-          site_name: 'kudos ink!', // TODO
+          site_name: 'kudos ink!',
           images: [
             {
-              url: `${env.url}/images/cover.jpg`, // TODO
+              url: `${env.url}/images/cover.jpg`,
               width: 1200,
               height: 675,
             },
@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <UseInkathonProvider
-        appName="kudos" // TODO
+        appName="kudos"
         connectOnInit={true}
         defaultChain={env.defaultChain}
         deployments={getDeployments()}
@@ -64,6 +64,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ChakraProvider>
             <DarkMode>
               <GlobalStyles />
+              <Header />
 
               <BaseLayout>
                 <Component {...pageProps} />
