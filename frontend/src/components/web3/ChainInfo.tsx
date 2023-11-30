@@ -35,7 +35,7 @@ export const ChainInfo: FC = () => {
   // Connection Loading Indicator
   if (!api)
     return (
-      <div tw="mt-8 mb-4 flex flex-col items-center justify-center space-y-3 text-center font-mono text-sm text-gray-400 sm:(flex-row space-x-3 space-y-0)">
+      <div tw="mt-8 mb-4 flex flex-col items-center justify-center space-y-3 text-center font-mono text-sm text-sky-400 sm:(flex-row space-x-3 space-y-0)">
         <Spinner size="sm" />
         <div>
           Connecting to {activeChain?.name} ({activeChain?.rpcUrls?.[0]})
@@ -46,7 +46,7 @@ export const ChainInfo: FC = () => {
   return (
     <>
       <div tw="flex grow flex-col space-y-4 max-w-[20rem]">
-        <h2 tw="text-center font-mono text-gray-400">Chain Info</h2>
+        <h2 tw="text-center font-mono text-sky-400">Chain Info</h2>
 
         <Card variant="outline" p={4} bgColor="whiteAlpha.100">
           {/* Metadata */}
@@ -65,7 +65,7 @@ export const ChainInfo: FC = () => {
               <Link
                 href={Object.values(activeChain.explorerUrls)[0]}
                 target="_blank"
-                tw="flex items-center justify-center gap-1 text-center text-sm text-gray-400 hover:text-white"
+                tw="flex items-center justify-center gap-1 text-center text-sm text-sky-400 hover:text-white"
               >
                 Explorer <HiOutlineExternalLink />
               </Link>
@@ -75,7 +75,7 @@ export const ChainInfo: FC = () => {
               <Link
                 href={activeChain.faucetUrls[0]}
                 target="_blank"
-                tw="flex items-center justify-center gap-1 text-center text-sm text-gray-400 hover:text-white"
+                tw="flex items-center justify-center gap-1 text-center text-sm text-sky-400 hover:text-white"
               >
                 Faucet <HiOutlineExternalLink />
               </Link>
@@ -85,7 +85,7 @@ export const ChainInfo: FC = () => {
               <Link
                 href={`https://contracts-ui.substrate.io/?rpc=${activeChain.rpcUrls[0]}`}
                 target="_blank"
-                tw="flex items-center justify-center gap-1 text-center text-sm text-gray-400 hover:text-white"
+                tw="flex items-center justify-center gap-1 text-center text-sm text-sky-400 hover:text-white"
               >
                 Contracts UI <HiOutlineExternalLink />
               </Link>

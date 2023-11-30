@@ -121,6 +121,7 @@ export const ConnectButton: FC<ConnectButtonProps> = () => {
           <Button
             py={6}
             pl={5}
+            backgroundColor="#1e3f57"
             rounded="2xl"
             fontWeight="bold"
             fontSize="sm"
@@ -137,6 +138,7 @@ export const ConnectButton: FC<ConnectButtonProps> = () => {
           as={Button}
           rightIcon={<FiChevronDown size={22} />}
           hidden={false}
+          backgroundColor="#1e3f57"
           py={6}
           pl={5}
           rounded="2xl"

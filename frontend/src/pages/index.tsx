@@ -1,8 +1,10 @@
+import { Contributions } from '@/components/contributions/ContributionList'
 import { HomePageTitle } from '@/components/home/HomePageTitle'
-import { HomeTopBar } from '@/components/home/HomeTopBar'
 import { CenterBody } from '@/components/layout/CenterBody'
 import { ChainInfo } from '@/components/web3/ChainInfo'
 import { ConnectButton } from '@/components/web3/ConnectButton'
+import { ContributionStatus } from '@/components/web3/ContributionStatus'
+import { MOCK_CONTRIBUTIONS } from '@/utils/constants'
 import { useInkathon } from '@scio-labs/use-inkathon'
 import type { NextPage } from 'next'
 import { useEffect } from 'react'
@@ -20,20 +22,12 @@ const HomePage: NextPage = () => {
   return (
     <>
       {/* Top Bar */}
-      <HomeTopBar />
+      {/* <HomeTopBar /> */}
 
-      <CenterBody tw="mt-20 mb-10 px-5">
-        {/* Title */}
-        <HomePageTitle />
-
-        {/* Connect Wallet Button */}
-        <ConnectButton />
-
-        <div tw="mt-10 flex w-full flex-wrap items-start justify-center gap-4">
-          {/* Chain Metadata Information */}
-          <ChainInfo />
-        </div>
-      </CenterBody>
+      <h3 tw="mb-4 flex cursor-pointer items-center gap-4 rounded-3xl py-1.5 px-3.5 font-bold text-2xl">
+        Available contributions
+      </h3>
+      <Contributions list={MOCK_CONTRIBUTIONS} />
     </>
   )
 }
