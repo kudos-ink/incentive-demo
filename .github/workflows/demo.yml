@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      
+
       - name: Extract Crypto Address
         id: extract
         run: |
@@ -47,10 +47,9 @@ jobs:
             const issue_number = context.issue.number;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            const blockHash = ${{ steps.approve.outputs.block }};
 
             // Post a comment mentioning the issue creator & tx hash
-            const commentBody = `@${{steps.get_creator.outputs.creator}} - Your contribution has been successfully approved.\nA proof has been registered here: https://test.azero.dev/?rpc=wss%3A%2F%2Fws.test.azero.dev#/explorer/query/${blockHash}`;
+            const commentBody = `@${{steps.get_creator.outputs.creator}} - Your contribution has been successfully approved.\nA proof has been registered and can be checked here: https://kudosink.vercel.app/check?contributionId=${issue_number}`;
             await github.rest.issues.createComment({
               owner: owner,
               repo: repo,
