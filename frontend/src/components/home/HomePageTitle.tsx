@@ -12,7 +12,8 @@ const StyledIconLink = styled(Link)(() => [
 
 export const HomePageTitle: FC = () => {
   const title = 'kudos ink!'
-  const desc = 'A minimalist kudos collector service for rewarded open source contributions.'
+  const desc =
+    'An automated contribution reward service using custom smart contracts and Github workflows.'
   const githubHref = 'https://github.com/kudos-ink'
   const deployHref = 'https://github.com/kudos-ink/demo'
   // const sponsorHref = 'mailto:hello@scio.xyz'
@@ -23,8 +24,7 @@ export const HomePageTitle: FC = () => {
       <div tw="flex flex-col items-center text-center font-mono">
         {/* Logo & Title */}
         <Link
-          href={githubHref}
-          target="_blank"
+          href="/"
           className="group"
           tw="flex cursor-pointer items-center gap-4 rounded-3xl py-1.5 px-3.5 transition-all hover:bg-sky-900"
         >

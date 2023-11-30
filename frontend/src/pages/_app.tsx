@@ -1,4 +1,6 @@
+import { HomePageTitle } from '@/components/home/HomePageTitle'
 import { BaseLayout } from '@/components/layout/BaseLayout'
+import { CenterBody } from '@/components/layout/CenterBody'
 import { Header } from '@/components/layout/Header'
 import { HotToastConfig } from '@/components/layout/HotToastConfig'
 import { env } from '@/config/environment'
@@ -67,7 +69,12 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Header />
 
               <BaseLayout>
-                <Component {...pageProps} />
+                <CenterBody tw="mt-32 mb-10 px-5 lg:mt-0">
+                  {/* Title */}
+                  <HomePageTitle />
+
+                  <Component {...pageProps} />
+                </CenterBody>
               </BaseLayout>
 
               <HotToastConfig />
