@@ -5,7 +5,7 @@ import { ConnectButton } from '../web3/ConnectButton'
 export const Header: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
-      <header tw="fixed flex w-full justify-end p-8 z-10">
+      <header tw="fixed z-10 flex w-full justify-end p-8">
         {/* Connect Wallet Button */}
         <ConnectButton />
       </header>
