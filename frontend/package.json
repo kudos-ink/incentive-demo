@@ -29,6 +29,7 @@
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@inkathon/contracts": "workspace:*",
+    "@notionhq/client": "^2.2.13",
     "@polkadot/api": "^10.10.1",
     "@polkadot/api-contract": "^10.10.1",
     "@polkadot/extension-dapp": "^0.46.5",
